@@ -2,25 +2,35 @@
   "name": "rderoovers-minesweeper-game",
   "version": "1.0.0",
   "description": "rderoovers-minesweeper-game",
+  "engines": {
+    "node": "12.x"
+  },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "request": "^2.81.0",
+    "tape": "^4.7.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RauulDeRoovers/rderoovers-minesweeper-game.git"
+    "url": "https://github.com/RauulDeRoovers/rderoovers-minesweeper-game"
   },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
   "author": "Raúl Andrés De Roovers",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/RauulDeRoovers/rderoovers-minesweeper-game/issues"
   },
-  "homepage": "https://github.com/RauulDeRoovers/rderoovers-minesweeper-game#readme",
-  "dependencies": {
-    "ejs": "^2.3.1",
-    "express": "~4.9.x"
-  },
-  "engines": {
-    "node": "0.12.2"
-  }
+  "homepage": "https://github.com/RauulDeRoovers/rderoovers-minesweeper-game#readme"
 }
