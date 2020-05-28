@@ -1,7 +1,8 @@
 {
-  "name": "node-js-getting-started",
+  "name": "rderoovers-minesweeper-game",
   "version": "0.3.0",
-  "description": "A sample Node.js app using Express 4",
+  "description": "rderoovers-minesweeper-game",
+  "author": "Raúl Andrés De Roovers",
   "engines": {
     "node": "12.x"
   },
@@ -20,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://github.com/RauulDeRoovers/rderoovers-minesweeper-game"
   },
   "keywords": [
     "node",
