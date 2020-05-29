@@ -6,7 +6,11 @@ angular.module('ngAppMinesweeper', ['minesweeperServiceModule']).controller('ngA
   $scope.mines = 8;
   $scope.status = 'Playing...';
   $scope.game = undefined;
+  $scope.flagToggleOn = false;
   $scope.init = function() {$scope.newGame()};
+  $scope.toggleFlag = function() {
+	  $scope.flagToggleOn = !$scope.flagToggleOn;
+  };
 	$scope.newGame = function() {
 		MinesweeperService.createNewGame($scope.rows, $scope.cols, $scope.mines).then( 
 			function(response) { 
@@ -27,7 +31,10 @@ angular.module('ngAppMinesweeper', ['minesweeperServiceModule']).controller('ngA
 		);
 	};
 	$scope.squareClick = function(evt, index) {
-		if (evt.which === 3) {
+		if (evt.which !== 1) {
+			return;
+		}
+		if ($scope.flagToggleOn) {
 			MinesweeperService.flagSquare($scope.game.id, index).then(
 				function(response) { 
 					$scope.game = response.data; 
@@ -47,9 +54,6 @@ angular.module('ngAppMinesweeper', ['minesweeperServiceModule']).controller('ngA
 					}
 				}
 			);
-			return;
-		}
-		if (evt.which !== 1) {
 			return;
 		}
 		MinesweeperService.updateGame($scope.game.id, index).then( 
