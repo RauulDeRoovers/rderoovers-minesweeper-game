@@ -16,6 +16,14 @@ var minesweeperService = function($http) {
 			});
 			//return $http.patch('http://localhost:8080/update', data);
 			return $http.patch('https://minesweeper-rest-service.herokuapp.com/update', data);
+		},
+		flagSquare: function(id, index) {
+			let data = JSON.stringify({
+				id: id,
+				square: index
+			});
+			//return $http.patch('http://localhost:8080/flag', data);
+			return $http.patch('https://minesweeper-rest-service.herokuapp.com/flag', data);
 		}
 	}
 };

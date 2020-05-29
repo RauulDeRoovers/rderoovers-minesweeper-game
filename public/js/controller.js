@@ -17,6 +17,9 @@ angular.module('ngAppMinesweeper', ['minesweeperServiceModule']).controller('ngA
 				if (response.status === -1) {
 					alert('Destination unreachable.');
 				}
+				else if (response.status === 400) {
+					alert('Invalid parameters! Please check rows, columns and mines.');
+				}
 				else {
 					alert('Unknown error.');
 				}
@@ -24,6 +27,31 @@ angular.module('ngAppMinesweeper', ['minesweeperServiceModule']).controller('ngA
 		);
 	};
 	$scope.squareClick = function(index) {
+		if (evt.which === 3) {
+			MinesweeperService.flagSquare($scope.game.id, index).then(
+				function(response) { 
+					$scope.game = response.data; 
+				}, 
+				function(response) {
+					if (response.status === -1) {
+					alert('Destination unreachable.');
+					}
+					else if (response.status === 405) {
+						alert('Game is over, please click "New Game!" to start a new game.');
+					}
+					else if (response.status === 400) {
+						alert('Invalid parameters, please do not tamper with arguments.');
+					}
+					else {
+						alert('Unknown error.');
+					}
+				}
+			);
+			return;
+		}
+		if (evt.which !== 1) {
+			return;
+		}
 		MinesweeperService.updateGame($scope.game.id, index).then( 
 			function(response) { 
 				$scope.game = response.data;

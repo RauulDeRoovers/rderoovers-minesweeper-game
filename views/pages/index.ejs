@@ -22,7 +22,12 @@
 					<div class="col-md-4">Mines: <input type="number" ng-model="mines"/></div>
 				</div>
 				<div class="row" style="margin: 10px;">
-					<div class="col-md-3">Status: {{status}}</div>
+					<div class="col-md-3">
+						<h5>
+							<span class="badge badge-dark">Status:</span>
+							<span style="margin-left: 1px;" class="badge" ng-class="{'badge-secondary': !game.finished, 'badge-danger': game.finished && !game.victory, 'badge-success': game.finished && game.victory}">{{status}}</span>
+						</h5>
+					</div>
 					<div class="col-md-6" style="text-align: center;"><button ng-click="newGame()" class="btn btn-info">New Game!</button></div>
 					<div class="col-md-6"></div>
 				</div>
@@ -30,7 +35,11 @@
 					<table cellspacing="0" cellpadding="0" align="center">
 						<tbody>
 							<tr ng-repeat="row in game.squares">
-								<td height="30px" width="30px" ng-repeat="col in row" ng-class="{unknown: col.type === 'UNKNOWN', mine: col.type === 'MINE', safe: col.type === 'SAFE'}" ng-click="squareClick(col.index)">
+								<td height="30px" width="30px" 
+									ng-repeat="col in row" 
+									ng-class="{unknown: col.type === 'UNKNOWN', mine: col.type === 'MINE', safe: col.type === 'SAFE', flagged: col.type === 'FLAGGED'}" 
+									ng-mouseup="squareClick($event, col.index)"
+									oncontextmenu="return false">
 									<span ng-if="col.type === 'SAFE' && (col.neighborsWithMines > 0)">{{col.neighborsWithMines}}</span>
 								</td>
 							</tr>
