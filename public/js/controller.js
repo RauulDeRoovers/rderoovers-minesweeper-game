@@ -26,7 +26,7 @@ angular.module('ngAppMinesweeper', ['minesweeperServiceModule']).controller('ngA
 			} 
 		);
 	};
-	$scope.squareClick = function(index) {
+	$scope.squareClick = function(evt, index) {
 		if (evt.which === 3) {
 			MinesweeperService.flagSquare($scope.game.id, index).then(
 				function(response) { 
