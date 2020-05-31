@@ -1,6 +1,13 @@
 (function(angular) {
   'use strict';
 angular.module('ngAppMinesweeper', ['minesweeperServiceModule']).controller('ngAppMinesweeperController', function($scope, $http, $interval, MinesweeperService) {
+	$scope.user = {
+		id: undefined,
+		user: 'Anonymous',
+		password: undefined,
+		signed: false,
+		error: false
+	};
 	$scope.rows = 8;
 	$scope.cols = 8;
 	$scope.mines = 8;
@@ -118,7 +125,39 @@ angular.module('ngAppMinesweeper', ['minesweeperServiceModule']).controller('ngA
 				$scope.loadingGame = false;
 			}
 		);
+	};
+	$scope.reload = function() {
+		$scope.gamesLoaded = false;
+		$scope.init();
 	}
+	$scope.login = function() {
+		$scope.user.error = false;
+		if ($scope.user.user === undefined || $scope.user.user === null || $scope.user.user.length < 4) {
+			$scope.user.error = true;
+			return;
+		}
+		if ($scope.user.password === undefined || $scope.user.password === null || $scope.user.user.password < 4) {
+			$scope.user.error = true;
+			return;
+		}
+		MinesweeperService.signIn($scope.user).then(
+			function(response) {
+				$scope.user.id = response.data.id;
+				$scope.user.signed = true;
+				$scope.reload();
+			},
+			function(response) {
+				$scope.handleError(response);
+			}
+		);
+	};
+	$scope.logut = function() {
+		$scope.user.id = undefined;
+		$scope.user.user = 'Anonymous';
+		$scope.user.password = undefined;
+		$scope.user.signed = false;
+		$scope.reload();
+	};
 	$scope.init();
 });
 })(window.angular);
