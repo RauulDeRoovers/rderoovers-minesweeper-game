@@ -34,6 +34,9 @@ angular.module('ngAppMinesweeper', ['minesweeperServiceModule']).controller('ngA
 			let message = isCreating ? 'Invalid parameters! Please check rows, columns and mines.' : 'Invalid parameters, please do not tamper with arguments.';
 			alert(message);
 		}
+		else if (response.status === 405) {
+			alert('Game is over, please click "New Game!" to start a new game.');
+		}
 		else {
 			alert('Unknown error.');
 		}
@@ -84,7 +87,7 @@ angular.module('ngAppMinesweeper', ['minesweeperServiceModule']).controller('ngA
 				$scope.loadingGame = false;
 			}, 
 			function(response) {
-				$scope.handleError(response);
+				$scope.handleError(response, true);
 				$scope.loadingGame = false;
 			} 
 		);
