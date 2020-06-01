@@ -26,7 +26,7 @@ angular.module('ngAppMinesweeper', ['minesweeperServiceModule']).controller('ngA
 			$interval.cancel($scope.timerInterval);
 		}
 	};
-	$scope.handleError = function(error, isCreating) {
+	$scope.handleError = function(response, isCreating) {
 		if (response.status === -1) {
 			alert('Destination unreachable.');
 		}
